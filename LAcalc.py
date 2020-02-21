@@ -117,7 +117,7 @@ def getToken(buffer):
                 Ltokens.append(Token("Number",Decimal(tempEntery)))
                 tempEntery=""
             
-            if(not(buffer[i]==".")):
+            if((buffer[i]==".")):
                 print("bad entry number with two or more '.' exit!!!")
                 break
 
