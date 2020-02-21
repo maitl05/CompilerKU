@@ -1,5 +1,3 @@
-#MAHDI AMINI-NEZHAD 9521178031
-
 from enum import Enum
 from decimal import Decimal
 # inn = open("myinput.txt","rt")
@@ -52,7 +50,7 @@ def getToken(buffer):
             elif(buffer[i].isdigit()):
                 state = 30
             
-            elif((buffer[i] == '+') or (buffer == '-') or (buffer[i] == '*') or (buffer[i] == '/')):
+            elif((buffer[i] == '+') or (buffer[i] == '-') or (buffer[i] == '*') or (buffer[i] == '/')):
                 state = 40
             
             elif((buffer[i] == '(') or (buffer[i] == ')')):
@@ -71,9 +69,10 @@ def getToken(buffer):
             if((buffer[i].isdigit()) or (buffer[i] == '_') or (buffer[i].isalpha())):
                 state = 10
                 tempEntery += buffer[i]
+                
                 i += 1
             
-            if(~((buffer[i].isdigit()) or (buffer[i] == '_') or (buffer[i].isalpha()))):
+            if(not((buffer[i].isdigit()) or (buffer[i] == '_') or (buffer[i].isalpha()))):
                 state = 0
                 Ltokens.append(Token("ID", tempEntery))
                 
@@ -88,7 +87,7 @@ def getToken(buffer):
                     print(" bad entry '==' exit!!!")
                     break
             
-            if(~(buffer[i] == "=")):
+            if(not(buffer[i] == "=")):
                 state = 0
 
         elif(state==30):
@@ -100,7 +99,7 @@ def getToken(buffer):
                     print("bad entry alphabet inside number exit!!!")
                     break
             
-            if(~(buffer[i].isdigit()) and ~(buffer[i] == ".")):
+            if(not(buffer[i].isdigit()) and not(buffer[i] == ".")):
                 state = 0
                 Ltokens.append(Token("Number", int(tempEntery)))
                 tempEntery = ""
@@ -116,17 +115,17 @@ def getToken(buffer):
                 tempEntery += buffer[i]
                 i += 1
             
-            if( ~(buffer[i].isdigit()) ):
+            if( not(buffer[i].isdigit()) ):
                 state = 0
                 Ltokens.append(Token("Number",Decimal(tempEntery)))
                 tempEntery=""
             
-            if(~(buffer[i]==".")):
+            if(not(buffer[i]==".")):
                 print("bad entry number with two or more '.' exit!!!")
                 break
 
         elif(state==40):
-            if((buffer[i] == '+') or (buffer == '-') or (buffer[i] == '*') or (buffer[i] == '/')):
+            if((buffer[i] == '+') or (buffer[i] == '-') or (buffer[i] == '*') or (buffer[i] == '/')):
                 Ltokens.append(Token("MathOperator", buffer[i]))
                 state = 0
                 i += 1
